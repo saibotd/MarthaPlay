@@ -1,0 +1,13 @@
+{
+    "presets": [
+        "react",
+        ["env", {
+            "targets": {
+                "browsers": ["last 2 versions"]
+            }
+        }]
+    ],
+    "plugins": [
+        "transform-decorators-legacy", "transform-class-properties", "transform-async-to-generator", "syntax-dynamic-import"
+    ]
+}

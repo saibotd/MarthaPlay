@@ -1,0 +1,224 @@
+$slick-font-path: "~slick-carousel/slick/fonts/";
+$slick-loader-path: "~slick-carousel/slick/";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+$primarycolor: #9326ff;
+$bgcolor1: #ccff99;
+$bgcolor2: #99ccff;
+$bgcolor3: #ff99cc;
+$textcolor: #666;
+
+
+*{
+    box-sizing: border-box;
+}
+
+html,body,#root,#root>div{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+body{
+    background: $bgcolor1;
+    color: $textcolor;
+    font-family: 'Lato', sans-serif;
+}
+
+img{
+    max-width: 100%;
+}
+
+#filelists{
+    transition: transform .5s;
+}
+
+.component-filelist{
+    box-sizing: content-box;
+    padding-top: 40px;
+    margin-top: -40px;
+    height: 75vh;
+    position: relative;
+    .back{
+        display: block;
+        position: absolute;
+        left:0;
+        top: 0;
+        width: 100%;
+        height: 40px;
+        border: 0;
+        background: rgba(255,255,255,.5);
+    }
+    .slick-slider, .slick-list, .slick-track, .slick-slide{
+        height: 100%;
+    }
+    .slick-arrow{
+        width: 12vw;
+        height: 12vw;
+        z-index: 20;
+        text-shadow: 0 0 5px #9326ff;
+    }
+    .slick-prev{
+        left: 0;
+    }
+    .slick-next{
+        right: 0;
+    }
+    .slick-dots{
+        bottom: -25px;
+    }
+    .slick-slide{
+        display: flex;
+    }
+    .slick-prev:before, .slick-next:before{
+        font-size: 50px;
+        color: $primarycolor;
+    }
+    .slick-dots li button:before{
+        color: #FFF;
+        text-shadow: 0 0 5px rgba(0,0,0,.8);
+    }
+}
+.component-filelistitem{
+    position: relative;
+    margin: auto auto 0 auto;
+    width: 50vw;
+    height: 50vw;
+    background:#FFF;
+    transition: background-color .5s;
+    &.playing{
+        .img{
+            opacity: .9;
+        }
+        &:after{
+            @include fa-icon;
+            content: $fa-var-play-circle;
+            position: absolute;
+            z-index: 1;
+            top: calc(50% - 30px);
+            left: calc(50% - 30px);
+            text-align: center;
+            font-size: 60px;
+            color: #FFF;
+            text-shadow: 0 0 10px rgba(0,0,0,.4);
+        }
+    }
+    &:nth-child(2){
+        background: lighten(#99ccff, 30);
+    }
+    .img{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        transition: opacity .5s;        
+        background-color: #99ccff;
+    }
+    .label{
+        position: absolute;
+        left: 15px;
+        bottom: 15px;
+        color: #FFF;
+        h3{
+            margin: 0;
+            line-height: 100%;
+            font-size: 50px;
+            text-shadow: 0 0 5px rgba(0,0,0,.8);
+            color: #ff99cc;
+        }
+        small{
+            background: #ff99cc;
+            padding: 0 5px;
+        }
+    }
+}
+
+.component-playercontrols{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(25vh - 40px);
+    background: opacify($bgcolor1, .5);
+    span{
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        text-overflow: ellipsis;
+    }
+    .num{
+        float: left;
+        font-size: 32px;
+        font-weight: 700;
+    }
+    .title{
+        margin-left: 80px;
+    }
+    .album{
+        margin-left: 80px;
+        font-size: 80%;
+        margin-top: 4px;
+    }
+    .controls{
+        float: right;
+        button{
+            width: calc(25vh - 40px);
+            height: calc(25vh - 40px);
+            background: $primarycolor;
+            color: #FFF;
+            border: 0;
+            margin: 2px;
+        }
+    }
+}
+
+.screensaver{
+    position: fixed;
+    background: #000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 80;
+    display: flex;
+    >.inner{
+        margin: auto;
+        font-size: 20px;
+        color: #DDD;
+        text-align: center;
+    }
+    &.night{
+        >.inner{
+            opacity: .5;
+        }
+    }
+    .time{
+        font-size: 400%;
+    }
+}
+
+@media (max-height: 700px) {
+    body, body *{
+        user-select: none;
+    }
+}
+
+.alarm{
+    position: fixed;
+    background: #5D206E url('../img/alarm.gif') no-repeat center;
+    background-size: contain;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+}

@@ -1,0 +1,16 @@
+{
+    "dir": "/home/pi/Music/Audiobooks",
+    "rotation": 0,
+    "time_format": "HH:mm:ss",
+    "night_mode": ["20:00", "07:00"],
+    "screensaver_timeout": 60,
+    "mpg321_opts": [],
+    "alarm": {
+        "enabled": true,
+        "schedule": "15 07 * * 0-6",
+        "playlist": [
+            "/home/pi/Music/Rooster.mp3",
+            "/home/pi/Music/ChopSuey.mp3"
+        ]
+    }
+}
