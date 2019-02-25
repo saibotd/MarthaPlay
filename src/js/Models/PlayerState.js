@@ -26,6 +26,7 @@ class PlayerState{
         this.index = 0;
         this.state = 'stop';
         this.metadata = null;
+        this.playlist = [];
         if(state.type == 'play'){
             this.state = state.type;
             this.index = state.status.index;

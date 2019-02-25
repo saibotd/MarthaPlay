@@ -52,6 +52,7 @@ player.on('info', ()=>{
 });
 
 player.on('end', ()=>{
+    console.log(playIndex);
     if(inList(playIndex+1)){
         playIndex++;
         play(playlist[playIndex]);

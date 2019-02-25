@@ -36,7 +36,6 @@ export default class Screensaver extends React.Component{
         }, 1);
     }
     get nightMode(){
-        console.log(this.props.nightModeStart, this.props.nightModeEnd);
         const start = moment(this.props.nightModeStart, 'HH:mm');
         const end = moment(this.props.nightModeEnd, 'HH:mm');
         return this.props.nightModeStart

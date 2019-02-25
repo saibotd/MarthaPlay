@@ -180,9 +180,24 @@ img{
     }
 }
 
+@keyframes colors {
+    0%   { background: #7a4527 }
+    10%   { background: #7a7427 }
+    20%   { background: #537a27 }
+    30%   { background: #277a3d }
+    40%   { background: #267764 }
+    50%   { background: #265277 }
+    60%   { background: #262c77 }
+    70%   { background: #472677 }
+    80%   { background: #6e2677 }
+    90%   { background: #772652 }
+    100%   { background: #7a4527 }
+  }
+
 .screensaver{
     position: fixed;
     background: #000;
+    animation: colors 120s infinite;
     left: 0;
     top: 0;
     width: 100vw;
