@@ -181,23 +181,23 @@ img{
 }
 
 @keyframes colors {
-    0%   { background: #7a4527 }
-    10%   { background: #7a7427 }
-    20%   { background: #537a27 }
-    30%   { background: #277a3d }
-    40%   { background: #267764 }
-    50%   { background: #265277 }
-    60%   { background: #262c77 }
-    70%   { background: #472677 }
-    80%   { background: #6e2677 }
-    90%   { background: #772652 }
-    100%   { background: #7a4527 }
+    0%   { background: #00D1D1 }
+    10%   { background: #D100D1 }
+    20%   { background: #D1D100 }
+    30%   { background: #4AD100 }
+    40%   { background: #004AD1 }
+    50%   { background: #D1004A }
+    60%   { background: #9500D1 }
+    70%   { background: #009BD1 }
+    80%   { background: #D1009B }
+    90%   { background: #D19500 }
+    100%   { background: #00D195 }
   }
 
 .screensaver{
     position: fixed;
     background: #000;
-    animation: colors 120s infinite;
+    animation: colors 500s infinite;
     left: 0;
     top: 0;
     width: 100vw;
@@ -207,12 +207,20 @@ img{
     >.inner{
         margin: auto;
         font-size: 20px;
-        color: #DDD;
+        color: #FFF;
         text-align: center;
     }
     &.night{
-        >.inner{
-            opacity: .5;
+        :after{
+            content: " ";
+            position: fixed;
+            display: block;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 85;
+            background: rgba(0,0,0,.5);
         }
     }
     .time{
