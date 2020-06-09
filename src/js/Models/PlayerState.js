@@ -1,64 +1,66 @@
-import Req from '../Request';
-import { observable } from 'mobx';
+import { observable, observe, computed } from "mobx";
+import axios from "axios";
 
-class PlayerState{
-    @observable file = '';
+class PlayerState {
     @observable index = 0;
-    @observable state = 'stop';
+    @observable state = "stop";
     @observable playlist = [];
     @observable metadata = null;
-    lastState = null;
-    subscribers = [];
-    subscribe(func){
-        this.subscribers.push(func);
+    @computed get file() {
+        if (this.playlist.length && this.index <= this.playlist.length - 1)
+            return this.playlist[this.index];
+        return "";
     }
-    set(state){
-        this.subscribers.forEach((func)=>{
-            func(state, this.lastState);
-        });
-        this.lastState = state;
-        if(state.type == 'update'){
-            console.log(state);
+    constructor() {
+        this.el = document.createElement("audio");
+        this.el.type = "audio/mpeg";
+        this.el.addEventListener("ended", () => this.next(true));
+        document.body.appendChild(this.el);
+    }
+    setPlaylist = (files, index = 0) => {
+        this.playlist = files;
+        this.index = index;
+        this.play();
+    };
+    play = async () => {
+        if (!this.file) return;
+        this.state = "play";
+        this.el.src = this.file;
+        this.el.play();
+        const { data } = await axios.post("/metadata", { path: this.file });
+        this.metadata = data.metadata;
+    };
+    pause = () => {
+        this.state = "pause";
+        this.el.pause();
+    };
+    resume = () => {
+        this.state = "play";
+        this.el.play();
+    };
+    next = (auto = false) => {
+        if (this.index + 1 >= this.playlist.length) {
+            if (auto) {
+                this.stop();
+            }
             return;
         }
-        this.file = '';
-        this.track = '';
-        this.index = 0;
-        this.state = 'stop';
-        this.metadata = null;
+        this.index++;
+        this.play();
+    };
+    stop = () => {
+        this.state = "stop";
         this.playlist = [];
-        if(state.type == 'play'){
-            this.state = state.type;
-            this.index = state.status.index;
-            this.file = state.status.file;
-            this.playlist = state.status.playlist;
-            this.metadata = state.status.metadata;
-        }
-    }
-    play = ()=>{
-        this.state = 'play';
-        Req.send({
-            action: 'pause'
-        });
-    }
-    pause = ()=>{
-        this.state = 'pause';
-        Req.send({
-            action: 'pause'
-        });
-    }
-    next = ()=>{
-        Req.send({
-            action: 'next'
-        });
-    }
-    prev = ()=>{
-        Req.send({
-            action: 'prev'
-        });
-    }
+        this.index = 0;
+        this.metadata = null;
+    };
+    prev = () => {
+        if (this.index == 0) return;
+        this.index--;
+        this.play();
+    };
 }
 
 const playerState = new PlayerState();
-window.playerState = playerState;
+
 export default playerState;

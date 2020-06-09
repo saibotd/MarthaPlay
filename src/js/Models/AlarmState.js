@@ -1,16 +1,13 @@
-import Req from '../Request';
-import { observable } from 'mobx';
+import { observable } from "mobx";
 
-class AlarmState{
+class AlarmState {
     @observable active = false;
-    set(state){
+    set(state) {
         this.active = state.active;
     }
-    disable = ()=>{
-        Req.send({
-            action: 'disable_alarm'
-        });
-    }
+    disable = () => {
+        this.active = false;
+    };
 }
 
 const alarmState = new AlarmState();

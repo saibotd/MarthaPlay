@@ -1,14 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Req from "../Request";
-import PlayerState from "../Models/PlayerState";
 import { observer } from "mobx-react";
+import React from "react";
+import PlayerState from "../Models/PlayerState";
 
 @observer
 export default class PlayerControls extends React.Component {
-    componentDidMount() {
-        Req.send({ action: "playlist" });
-    }
+    componentDidMount() {}
     render() {
         if (PlayerState.state == "stop") return null;
         let meta;
@@ -33,7 +29,7 @@ export default class PlayerControls extends React.Component {
             );
         if (PlayerState.state == "pause")
             playPause = (
-                <button onClick={PlayerState.play}>
+                <button onClick={PlayerState.resume}>
                     <i className="fa fa-play" aria-hidden="true" />
                 </button>
             );
@@ -45,7 +41,7 @@ export default class PlayerControls extends React.Component {
                 {meta}
                 <div className="controls">
                     {playPause}
-                    <button onClick={PlayerState.next}>
+                    <button onClick={() => PlayerState.next(false)}>
                         <i className="fa fa-step-forward" aria-hidden="true" />
                     </button>
                 </div>
