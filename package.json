@@ -14,7 +14,7 @@
         "cron-parser": "^2.15.0",
         "express": "^4.17.1",
         "glob": "^7.1.6",
-        "moment-timezone": "^0.5.31",
+        "moment-timezone": "^0.5.35",
         "musicmetadata": "^2.0.5"
     },
     "devDependencies": {
